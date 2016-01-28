@@ -8,13 +8,13 @@ const uglify = require('gulp-uglify');
 
 const path = {
 	ENTRY: './src/app.js',
-	DEST: 'dest',
+	DEST: 'dest/js',
 	OUT: 'bundle.js',
 };
 
 gulp.task('default', ()=>{});
 gulp.task('buildjs', ()=>{
-	browserify('./src/app.js')
+	browserify('./src/app.js', {debug: true})
 	.transform("babelify", {presets: ['es2015', 'react']})
 	.bundle()
 	.pipe(source(path.OUT))
@@ -23,5 +23,5 @@ gulp.task('buildjs', ()=>{
 
 
 gulp.task('watch', ()=>{
-	gulp.watch('./src/*.js', ['buildjs'])
+	gulp.watch('./src/*.js', ['Y'])
 });

@@ -1,7 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Dropdown from './Dropdown';
 
-export  class Dropdown extends React.Component{
-	render(){
-		return (<div></div>);
-	}
-}
+var app = document.getElementById('drop');
+var list = [
+	{name: "One", ID: 1},
+	{name: "Two", ID: 2},
+	{name: "Three", ID: 3}
+]
+ReactDOM.render(<Dropdown list={list} />, app);
