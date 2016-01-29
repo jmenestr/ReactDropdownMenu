@@ -9,16 +9,12 @@ export default class Dropdown extends React.Component{
 		}
 	}
 	_handleDropdownClick(){
-		this.setState({ expanded: true })
+		var newExpandedState = (this.state.expanded) ? false : true;
+		this.setState({ expanded: newExpandedState });
 	}
+ 
 	_renderDropdownCaret(){
-		var caret;
-		if(this.state.expanded) {
-				caret = <Fontawesome name='caret-up' size='2x' style={{ color: 'black' }}/>
-		}else{
-				caret = <Fontawesome name='caret-down' size='2x' style={{color: 'black' }}/>
-		}
-		return caret;
+				return <div className={'caret' + (this.state.expanded? " up" : "")}>&#xffec;</div>
 	}
 	_renderListItems(){
 		return (
@@ -29,13 +25,13 @@ export default class Dropdown extends React.Component{
 	}
 	render(){
 		return(
-			<div className={'dropdown-container' + (this.state.expanded ? " open": "")}>
-				<div className='dropdown-button' onClick={this._handleDropdownClick}>
-					<span className='button-title'>Dropdown Button{this._renderDropdownCaret()}</span>
+			<div className={'dropdown-container' + (this.state.expanded ? " open" : "")}>
+				<div className='dropdown-button' onClick={this._handleDropdownClick.bind(this)}>
+					<span className='button-title'>Dropdown Button</span>{this._renderDropdownCaret()}
 				</div>
-				<div className='dropdown-list'>
+				<ul className='dropdown-list'>
 					{this._renderListItems()}
-				</div>
+				</ul>
 			</div>
 		)
 	}
@@ -47,9 +43,9 @@ class DropdownItem extends React.Component{
 	render(){
 		var item = this.props.item;
 		return (
-			<div key={item.ID} className='dropdown-item'>
+			<li key={item.ID} className='dropdown-item'>
 				<span>{item.name}</span>
-			</div>
+			</li>
 		);
 	}
 }
